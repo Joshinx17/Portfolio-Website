@@ -121,7 +121,124 @@ a {
   text-decoration: underline;
 }
 
+/* Typing text animation */
+.typing-text {
+  border-right: 3px solid black;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blinkCursor 0.7s steps(1) infinite;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+}
 
+@keyframes blinkCursor {
+  50% {
+    border-color: transparent;
+  }
+}
 
+/* Skills Section Styling */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  align-items: center;
+  padding: 20px;
+}
 
+.skill-card {
+  width: 100%;
+  max-width: 220px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  background: #ffffff; /* pure white background */
+  border: 2px solid #333;
+  border-radius: 14px; /* rectangular with slightly soft corners */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.12),
+              -4px -4px 8px rgba(255, 255, 255, 0.6);
+  transition: all 0.25s ease;
+  perspective: 1000px;
+  position: relative;
+  color: #111;
+}
 
+/* Light reflection effect */
+.skill-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.6),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: rotateX(var(--tiltY, 0deg)) rotateY(var(--tiltX, 0deg)) scale(1.05);
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+}
+
+/* Animated Network Background */
+#network-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind everything */
+  background: transparent;
+  filter: blur(0px);
+}
+
+/* === Transparent Background Layers === */
+
+/* Make sections semi-transparent to reveal canvas */
+section {
+  background-color: rgba(255, 255, 255, 0.85) !important; /* light white overlay */
+  backdrop-filter: blur(2px); /* gives depth & smoothness */
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep footer consistent */
+footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(3px);
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure navbar stays above canvas but not hiding sections */
+.custom-header {
+  position: relative;
+  z-index: 10;
+}
+
+/* Canvas stays fixed behind everything */
+#network-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: transparent;
+  filter: blur(1px);
+}
